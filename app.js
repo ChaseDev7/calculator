@@ -87,19 +87,11 @@ function addDecimal (decimal) {
     };
 }
 
-// btnEquals.addEventListener("click", runEquals);
+btnEquals.addEventListener("click", runEquals);
 
-// function runEquals() {
-//     const firstString = firstValue.toString();
-//     const secondString = secondValue.toString();
-//     const operandString = "empty";
-//     if (operandValue == "+") {
-//         const addString = firstString + secondString
-//     } 
-//     const totalValue = 
-//     currentCalc.textContent = totalValue;
-//     console.log(totalValue);
-// }
+function runEquals() {
+    
+}
 
 btnClear.addEventListener("click", runClear);
 
