@@ -2,6 +2,7 @@ let firstValue = [];
 let secondValue = [];
 
 let currentCalc = document.querySelector(".current-calc");
+let previousCalc = document.querySelector(".previous-calc");
 const btn = document.querySelectorAll("button");
 const btnNumber = document.querySelectorAll(".btn-number");
 const btnClear = document.querySelector(".btn-clear");
@@ -43,7 +44,6 @@ function addOperand(operand) {
         operandValue = operand;
         const numString = firstValue.join("") + " " + operandValue + " " + secondValue.join("");
         currentCalc.textContent = numString;
-        console.log(operandValue);
     };
 }
 
@@ -90,7 +90,36 @@ function addDecimal (decimal) {
 btnEquals.addEventListener("click", runEquals);
 
 function runEquals() {
-    
+    if (operandValue == "+") {
+        previousCalc.textContent = "";
+        const totalValue = Number(firstValue.join("")) + Number(secondValue.join(""));
+        currentCalc.textContent = "";
+        previousCalc.append(totalValue);
+        firstValue = [totalValue];
+        operandValue = "empty";
+        secondValue = [];
+    } else if (operandValue == "-") {
+        const totalValue = Number(firstValue.join("")) - Number(secondValue.join(""));
+        currentCalc.textContent = "";
+        previousCalc.append(totalValue);
+        firstValue = [totalValue];
+        operandValue = "empty";
+        secondValue = [];
+    } else if (operandValue == "x") {
+        const totalValue = Number(firstValue.join("")) * Number(secondValue.join(""));
+        currentCalc.textContent = "";
+        previousCalc.append(totalValue);
+        firstValue = [totalValue];
+        operandValue = "empty";
+        secondValue = [];
+    } else if (operandValue == "÷") {
+        const totalValue = Number(firstValue.join("")) / Number(secondValue.join(""));
+        currentCalc.textContent = "";
+        previousCalc.append(totalValue);
+        firstValue = [totalValue];
+        operandValue = "empty";
+        secondValue = [];
+    }
 }
 
 btnClear.addEventListener("click", runClear);
@@ -100,4 +129,5 @@ function runClear() {
     secondValue = [];
     operandValue = "empty"
     currentCalc.textContent = "";
+    previousCalc.textContent = "";
 }
