@@ -2,10 +2,10 @@ let firstValue = [];
 let secondValue = [];
 
 let currentCalc = document.querySelector(".current-calc");
-let previousCalc = document.querySelector(".previous-calc");
 const btn = document.querySelectorAll("button");
 const btnNumber = document.querySelectorAll(".btn-number");
 const btnClear = document.querySelector(".btn-clear");
+const btnDelete = document.querySelector(".btn-delete");
 const btnDecimal = document.querySelector(".btn-decimal");
 const btnOperand = document.querySelectorAll(".btn-operand");
 let operandValue = "empty";
@@ -16,7 +16,7 @@ btnNumber.forEach(btn => {
         addCode(btn.textContent);
     });
 });
-
+// Add code to switch to secondValue if equalsButton has been pressed.
 function addCode(num) {
     if (operandValue != "empty") {
         currentCalc.textContent = secondValue;
@@ -36,6 +36,18 @@ btnOperand.forEach(btn => {
         addOperand(btn.textContent);
     });
 });
+
+btnDelete.addEventListener("click", deleteLast);
+
+function deleteLast() {
+    if (operandValue == "empty") {
+        firstValue.pop();
+        currentCalc.textContent = firstValue.join("");
+    } else {
+        secondValue.pop();
+        currentCalc.textContent = firstValue.join("") + " " + operandValue + " " + secondValue.join("");
+    };
+}
 
 function addOperand(operand) {
     if (operandValue != "empty") {
@@ -91,35 +103,34 @@ btnEquals.addEventListener("click", runEquals);
 
 function runEquals() {
     if (operandValue == "+") {
-        previousCalc.textContent = "";
         const totalValue = Number(firstValue.join("")) + Number(secondValue.join(""));
-        currentCalc.textContent = "";
-        previousCalc.append(totalValue);
-        firstValue = [totalValue];
+        currentCalc.textContent = Number(Math.round(totalValue+"e4")+"e-4");
+        firstValue = [Number(Math.round(totalValue+"e4")+"e-4")];
         operandValue = "empty";
         secondValue = [];
     } else if (operandValue == "-") {
         const totalValue = Number(firstValue.join("")) - Number(secondValue.join(""));
-        currentCalc.textContent = "";
-        previousCalc.append(totalValue);
-        firstValue = [totalValue];
+        currentCalc.textContent = Number(Math.round(totalValue+"e4")+"e-4");
+        firstValue = [Number(Math.round(totalValue+"e4")+"e-4")];
         operandValue = "empty";
         secondValue = [];
     } else if (operandValue == "x") {
         const totalValue = Number(firstValue.join("")) * Number(secondValue.join(""));
-        currentCalc.textContent = "";
-        previousCalc.append(totalValue);
-        firstValue = [totalValue];
+        currentCalc.textContent = Number(Math.round(totalValue+"e4")+"e-4");
+        firstValue = [Number(Math.round(totalValue+"e4")+"e-4")];
         operandValue = "empty";
         secondValue = [];
     } else if (operandValue == "÷") {
-        const totalValue = Number(firstValue.join("")) / Number(secondValue.join(""));
-        currentCalc.textContent = "";
-        previousCalc.append(totalValue);
-        firstValue = [totalValue];
-        operandValue = "empty";
-        secondValue = [];
-    }
+        if (operandValue == "÷" && secondValue == 0) {
+            currentCalc.textContent = "BOOBIES";
+        } else {
+           const totalValue = Number(firstValue.join("")) / Number(secondValue.join(""));
+            currentCalc.textContent = Number(Math.round(totalValue+"e4")+"e-4");
+            firstValue = [Number(Math.round(totalValue+"e4")+"e-4")];
+            operandValue = "empty";
+            secondValue = []; 
+        };
+    };
 }
 
 btnClear.addEventListener("click", runClear);
@@ -127,7 +138,6 @@ btnClear.addEventListener("click", runClear);
 function runClear() {
     firstValue = [];
     secondValue = [];
-    operandValue = "empty"
+    operandValue = "empty";
     currentCalc.textContent = "";
-    previousCalc.textContent = "";
 }
