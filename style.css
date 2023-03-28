@@ -14,7 +14,7 @@ body {
 .display {
     margin-top: 25px;
     width: 100%;
-    height: 85px;
+    height: 70px;
     background-color: rgb(42, 57, 68);
     border-radius: 20px 20px 0px 0px;
 }
@@ -48,8 +48,15 @@ button {
 
 .btn-clear {
     background-color: rgb(220, 112, 100);
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
 
 .btn-operand {
     background-image: linear-gradient(to bottom right, rgb(56, 169, 230), rgb(146, 204, 235));
+}
+
+.btn-equals {
+    grid-column-start: 3;
+    grid-column-end: 5;
 }

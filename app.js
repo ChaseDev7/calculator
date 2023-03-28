@@ -1,6 +1,6 @@
 let firstValue = [];
 let secondValue = [];
-
+let isTotalTrue = false;
 let currentCalc = document.querySelector(".current-calc");
 const btn = document.querySelectorAll("button");
 const btnNumber = document.querySelectorAll(".btn-number");
@@ -16,7 +16,7 @@ btnNumber.forEach(btn => {
         addCode(btn.textContent);
     });
 });
-// Add code to switch to secondValue if equalsButton has been pressed.
+
 function addCode(num) {
     if (operandValue != "empty") {
         currentCalc.textContent = secondValue;
@@ -24,10 +24,14 @@ function addCode(num) {
         const numString = firstValue.join("") + " " + operandValue + " " + secondValue.join("");
         currentCalc.textContent = numString;
     } else {
-        currentCalc.textContent = firstValue;
-        firstValue.push(num);
-        const numString = firstValue.join("");
-        currentCalc.textContent = numString;
+        if (isTotalTrue == true) {
+            btnNumber.removeEventListener;
+        } else {
+            currentCalc.textContent = firstValue;
+            firstValue.push(num);
+            const numString = firstValue.join("");
+            currentCalc.textContent = numString;
+        }; 
     };
 }
 
@@ -50,13 +54,17 @@ function deleteLast() {
 }
 
 function addOperand(operand) {
-    if (operandValue != "empty") {
+    if (firstValue.length === 0) {
         btnOperand.removeEventListener;
     } else {
-        operandValue = operand;
-        const numString = firstValue.join("") + " " + operandValue + " " + secondValue.join("");
-        currentCalc.textContent = numString;
-    };
+        if (operandValue != "empty") {
+            btnOperand.removeEventListener;
+        } else {
+            operandValue = operand;
+            const numString = firstValue.join("") + " " + operandValue + " " + secondValue.join("");
+            currentCalc.textContent = numString;
+        };
+    }; 
 }
 
 btnDecimal.addEventListener("click", () => {
@@ -68,17 +76,21 @@ function addDecimal (decimal) {
         if (firstValue.includes(".") || firstValue.includes("0.")) {
             btnDecimal.removeEventListener;
         } else {
-            if (firstValue.length === 0) {
-                firstValue.push("0" + decimal);
-                const decimalString = firstValue.join("");
-                currentCalc.textContent = "";
-                currentCalc.append(decimalString);
+            if (isTotalTrue == true) {
+                btnDecimal.removeEventListener;
             } else {
-                firstValue.push(decimal);
-                const decimalString = firstValue.join("");
-                currentCalc.textContent = "";
-                currentCalc.append(decimalString);
-            };
+                if (firstValue.length === 0) {
+                    firstValue.push("0" + decimal);
+                    const decimalString = firstValue.join("");
+                    currentCalc.textContent = "";
+                    currentCalc.append(decimalString);
+                } else {
+                    firstValue.push(decimal);
+                    const decimalString = firstValue.join("");
+                    currentCalc.textContent = "";
+                    currentCalc.append(decimalString);
+                };
+            }; 
         };
     } else {
         if (secondValue.includes(".") || secondValue.includes("0.")) {
@@ -94,7 +106,7 @@ function addDecimal (decimal) {
                 const decimalString = firstValue.join("") + " " + operandValue + " " + secondValue.join("");
                 currentCalc.textContent = "";
                 currentCalc.append(decimalString);
-            };
+            }; 
         };
     };
 }
@@ -108,27 +120,32 @@ function runEquals() {
         firstValue = [Number(Math.round(totalValue+"e4")+"e-4")];
         operandValue = "empty";
         secondValue = [];
+        isTotalTrue = true;
     } else if (operandValue == "-") {
         const totalValue = Number(firstValue.join("")) - Number(secondValue.join(""));
         currentCalc.textContent = Number(Math.round(totalValue+"e4")+"e-4");
         firstValue = [Number(Math.round(totalValue+"e4")+"e-4")];
         operandValue = "empty";
         secondValue = [];
+        isTotalTrue = true;
     } else if (operandValue == "x") {
         const totalValue = Number(firstValue.join("")) * Number(secondValue.join(""));
         currentCalc.textContent = Number(Math.round(totalValue+"e4")+"e-4");
         firstValue = [Number(Math.round(totalValue+"e4")+"e-4")];
         operandValue = "empty";
         secondValue = [];
+        isTotalTrue = true;
     } else if (operandValue == "÷") {
         if (operandValue == "÷" && secondValue == 0) {
             currentCalc.textContent = "BOOBIES";
+            isTotalTrue = true;
         } else {
            const totalValue = Number(firstValue.join("")) / Number(secondValue.join(""));
             currentCalc.textContent = Number(Math.round(totalValue+"e4")+"e-4");
             firstValue = [Number(Math.round(totalValue+"e4")+"e-4")];
             operandValue = "empty";
-            secondValue = []; 
+            secondValue = [];
+            isTotalTrue = true;
         };
     };
 }
@@ -140,4 +157,5 @@ function runClear() {
     secondValue = [];
     operandValue = "empty";
     currentCalc.textContent = "";
+    isTotalTrue = false;
 }
