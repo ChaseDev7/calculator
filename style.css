@@ -104,11 +104,6 @@ button {
     background-image: linear-gradient(to bottom right, rgb(146, 204, 235), rgb(56, 169, 230));
 }
 
-.btn-operand:active {
-    background-image: none;
-    background-color: rgb(56, 169, 230);
-}
-
 .btn-equals {
     grid-column-start: 3;
     grid-column-end: 5;
