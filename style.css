@@ -60,17 +60,57 @@ button {
     border-radius: 20px;
 }
 
+.btn-number,
+.btn-delete,
+.btn-decimal {
+    transition: 0.3s;
+}
+
+.btn-number:hover,
+.btn-delete:hover,
+.btn-decimal:hover,
+.btn-equals:hover {
+    background-color: rgb(191, 198, 207);
+}
+
+.btn-number:active,
+.btn-delete:active,
+.btn-decimal:active,
+.btn-equals:active {
+    background-color: rgb(165, 167, 169);
+}
+
 .btn-clear {
     background-color: rgb(220, 112, 100);
     grid-column-start: 1;
     grid-column-end: 3;
+    transition: 0.3s;
+}
+
+.btn-clear:hover {
+    background-color: rgb(203, 103, 92);
+}
+
+.btn-clear:active {
+    background-color: rgb(176, 74, 63);
 }
 
 .btn-operand {
     background-image: linear-gradient(to bottom right, rgb(56, 169, 230), rgb(146, 204, 235));
+    transition: 0.3s;
+}
+
+.btn-operand:hover {
+    background-image: linear-gradient(to bottom right, rgb(146, 204, 235), rgb(56, 169, 230));
+}
+
+.btn-operand:active {
+    background-image: none;
+    background-color: rgb(56, 169, 230);
 }
 
 .btn-equals {
     grid-column-start: 3;
     grid-column-end: 5;
+    transition: 0.3s;
 }
