@@ -10,6 +10,7 @@ const btnDecimal = document.querySelector(".btn-decimal");
 const btnOperand = document.querySelectorAll(".btn-operand");
 let operandValue = "empty";
 const btnEquals = document.querySelector(".btn-equals");
+const message = document.querySelector(".message-text");
 
 btnNumber.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -18,6 +19,7 @@ btnNumber.forEach(btn => {
 });
 
 function addCode(num) {
+    message.textContent = "";
     if (operandValue != "empty") {
         currentCalc.textContent = secondValue;
         secondValue.push(num);
@@ -71,7 +73,7 @@ btnDecimal.addEventListener("click", () => {
     addDecimal(".");
 });
 
-function addDecimal (decimal) {
+function addDecimal(decimal) {
     if (operandValue === "empty") {
         if (firstValue.includes(".") || firstValue.includes("0.")) {
             btnDecimal.removeEventListener;
@@ -116,33 +118,37 @@ btnEquals.addEventListener("click", runEquals);
 function runEquals() {
     if (operandValue == "+") {
         const totalValue = Number(firstValue.join("")) + Number(secondValue.join(""));
-        currentCalc.textContent = Number(Math.round(totalValue+"e4")+"e-4");
-        firstValue = [Number(Math.round(totalValue+"e4")+"e-4")];
+        currentCalc.textContent = Number(Math.round(totalValue+"e5")+"e-5");
+        firstValue = [Number(Math.round(totalValue+"e5")+"e-5")];
         operandValue = "empty";
         secondValue = [];
         isTotalTrue = true;
     } else if (operandValue == "-") {
         const totalValue = Number(firstValue.join("")) - Number(secondValue.join(""));
-        currentCalc.textContent = Number(Math.round(totalValue+"e4")+"e-4");
-        firstValue = [Number(Math.round(totalValue+"e4")+"e-4")];
+        currentCalc.textContent = Number(Math.round(totalValue+"e5")+"e-5");
+        firstValue = [Number(Math.round(totalValue+"e5")+"e-5")];
         operandValue = "empty";
         secondValue = [];
         isTotalTrue = true;
     } else if (operandValue == "x") {
         const totalValue = Number(firstValue.join("")) * Number(secondValue.join(""));
-        currentCalc.textContent = Number(Math.round(totalValue+"e4")+"e-4");
-        firstValue = [Number(Math.round(totalValue+"e4")+"e-4")];
+        currentCalc.textContent = Number(Math.round(totalValue+"e5")+"e-5");
+        firstValue = [Number(Math.round(totalValue+"e5")+"e-5")];
         operandValue = "empty";
         secondValue = [];
         isTotalTrue = true;
     } else if (operandValue == "÷") {
         if (operandValue == "÷" && secondValue == 0) {
             currentCalc.textContent = "BOOBIES";
-            isTotalTrue = true;
+            message.textContent = "Calculator reset";
+            firstValue = [];
+            secondValue = [];
+            operandValue = "empty";
+            isTotalTrue = false;
         } else {
            const totalValue = Number(firstValue.join("")) / Number(secondValue.join(""));
-            currentCalc.textContent = Number(Math.round(totalValue+"e4")+"e-4");
-            firstValue = [Number(Math.round(totalValue+"e4")+"e-4")];
+            currentCalc.textContent = Number(Math.round(totalValue+"e5")+"e-5");
+            firstValue = [Number(Math.round(totalValue+"e5")+"e-5")];
             operandValue = "empty";
             secondValue = [];
             isTotalTrue = true;
