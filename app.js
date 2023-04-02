@@ -144,7 +144,6 @@ function runEquals() {
             firstValue = [];
             secondValue = [];
             operandValue = "empty";
-            isTotalTrue = false;
         } else {
            const totalValue = Number(firstValue.join("")) / Number(secondValue.join(""));
             currentCalc.textContent = Number(Math.round(totalValue+"e5")+"e-5");
